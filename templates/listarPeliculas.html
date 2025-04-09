@@ -1,0 +1,60 @@
+{% extends "index.html" %}
+{% block menu %} 
+    {% include "menu.html" %}
+{%endblock %}
+{% block contenido %} 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- Agregar jQuery antes -->
+<link rel="stylesheet" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.min.css">
+<script src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js"></script>
+    <div class="w-75" style="margin: 0 auto">
+        <h3 class="text-center fw-bold">LISTADO DE PELÍCULAS</h3>
+        <div>
+            <a href="/vistaAgregarPelicula/"><button class="btn btn-secondary">Agregar</button></a>
+        </div>
+        <DIV>
+            <table id="tbPeliculas" class="table table-bordered mt-2" >
+                <thead class="table-secondary text-center">
+                    <tr>
+                        <th>Código</th>
+                        <th>Titulo</th>
+                        <th>Duración</th>
+                        <th>Protagonista</th>
+                        <th>Género</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody id="datosPeliculas">
+                    {%for p in peliculas%}
+                        <tr>
+                            <td>{{p.codigo}}</td>
+                            <td>{{p.titulo}}</td>
+                            <td>{{p.duracion}}</td>
+                            <td>{{p.protagonista}}</td>
+                            <!--ontener nombre de genero a partir del id-->                          
+                            {% for g in generos %}                               
+                                {% if g.id == p.genero.id %}
+                                    <td>{{g.nombre}}</td>
+                                {%endif%}
+                            {%endfor%}                           
+                            <td class="text-center" style="font-size:3vh">
+                                <a href="/vistaEditarPelicula/{{p.id}}/">
+                                    <i class="fa fa-edit text-warning" title="Editar"></i>
+                                </a>
+
+                                <i class="fa fa-trash text-danger" title="Eliminar" 
+                                onclick="deletePelicula('{{p.id}}')"></i>
+                                
+                            </td>
+                        </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </DIV>        
+    </div>
+    <script>
+        let table = new DataTable('#tbPeliculas'); <!-- Cambiar el ID al correcto -->
+    </script>
+{%endblock %}
+{% block piePagina %} 
+    {% include "piePagina.html" %}
+{%endblock %}

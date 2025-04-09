@@ -1,0 +1,37 @@
+{% extends "index.html" %}
+{% block menu %}
+    {% include "menu.html"%}
+{%endblock%}
+{% block contenido %}
+    <!--html para lstar-->
+    <div class="w-50" style="margin: 0 auto">
+        <h3 class="text-center fw-bold">LISTA DE GÉNEROS DE PÉLICULAS</h3>
+        <div>
+            <a href="/vistaGenero/">
+                <button class="btn btn-secondary">Agregar</button>
+            </a>
+        </div>
+        <table class="table table-bordered mt-2">
+            <thead class="table-secondary">
+                <tr>
+                    <th>Nombre</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for genero in generos %}
+                    <tr>
+                        <td width="80%">{{genero.nombre}}</td>
+                        <td class="text-center">
+                            <i class="fa fa-edit text-warning"></i>
+                            <i class="fa fa-trash text-danger"></i>
+                        </td>
+                    </tr>
+                {% endfor%}
+            </tbody>
+        </table>
+    </div>
+{%endblock%}
+{%block piePagina%}
+    {% include "piePagina.html" %}
+{%endblock%}

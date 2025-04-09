@@ -1,0 +1,62 @@
+{% extends "index.html" %}
+{% block menu %} 
+    {% include "menu.html" %}
+{%endblock %}
+{% block contenido %}
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+    <div class="w-25" style="margin: 0 auto">
+        <form id="frmPelicula" class="was-validated" enctype="multipart/form-data">
+            <div>
+                <h3 class="text-center fw-bold bg-dark text-white" style="font-size:2lvw">EDITAR PELÍCULA</h3>  
+            </div>
+            <div class="mb-3">
+                <label class="fw-bold" for="txtCodigo">Código:</label>
+                <input type="number" name="txtCodigo" id="txtCodigo" class="form-control" 
+                value="{{pelicula.codigo}}"  required>
+            </div>
+            <div class="mb-3">
+                <label class="fw-bold" for="txtNombre">Título:</label>
+                <input type="text" name="txtTitulo" id="txtTitulo" class="form-control" 
+                value="{{pelicula.titulo}}"  required>
+            </div>
+            <div class="mb-3">
+                <label class="fw-bold" for="txtProtagonista">Protagonista:</label>
+                <input type="text" name="txtProtagonista" id="txtProtagonista" class="form-control" 
+                value="{{pelicula.protagonista}}"  required>
+            </div>
+            <div class="mb-3">
+                <label class="fw-bold" for="txtDuracion">Duracion(minutos):</label>
+                <input type="number" name="txtDuracion" id="txtDuracion" min="30" max="200" class="form-control" 
+                value="{{pelicula.duracion}}"  required>
+            </div>
+            <div class="mb-3">
+                <label class="fw-bold" for="cbGenero">Género:</label>
+                    <select name="cbGenero" id="cbGenero" class="form-select" value="{{pelicula.genero.id}}" required>
+                        <option value="" selected>Seleccione</option>
+                        {%for g in generos %}                            
+                            <option value="{{g.id}}">{{g.nombre}}</option>
+                        {%endfor%}                    
+                    </select>
+            </div>            
+            <div class="mb-3">
+                <label class="fw-bold" for="txtresumen">Resumen:</label>
+                <textarea name="txtResumen" id="txtResumen" cols="30" rows="3" class="form-control" 
+                required>{{pelicula.resumen}}</textarea>
+            </div>
+            <div>
+                <button type="button" class="btn btn-dark" 
+                onclick="editarPelicula('{{pelicula.id}}')">Editar</button>
+
+                <a href="/peliculas/"><button type="button"  class="btn btn-secondary">Cancelar</button></a>
+            </div>           
+        </form>
+        <script>
+            document.getElementById('cbGenero').value = '{{pelicula.genero.id}}'
+        </script>
+    </div>       
+{%endblock %}
+{% block piePagina %} 
+    {% include "piePagina.html" %}
+{%endblock %}
+
+

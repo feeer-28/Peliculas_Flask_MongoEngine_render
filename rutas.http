@@ -1,0 +1,97 @@
+### Listar generos
+
+GET HTTP://127.0.0.1:5000/genero/   
+
+
+###agregar genero
+POST HTTP://127.0.0.1:5000/genero/   
+Content-Type: application/json
+
+{
+    "nombre": "Acción"
+}
+
+### 
+
+POST HTTP://127.0.0.1:5000/usuario/   
+Content-Type: application/json
+
+{
+    "usuario": "adso",
+    "password":"cauca",
+    "nombres": "Cesar",
+    "apellidos":"cuellar",
+    "correo": "cesarmcuellar@gmail.com"
+}
+
+### listar peliculas
+
+GET HTTP://127.0.0.1:5000/pelicula/   
+
+
+###agregar pelicula
+
+POST HTTP://127.0.0.1:5000/pelicula/   
+Content-Type: application/json
+
+{
+    "codigo": 100,
+    "titulo":"SuperMdsfsdfsdfsd",
+    "protagonista": "cAMILO Perez",
+    "duracion":120,
+    "resumen": "yyyyyyyyyyyyyy",
+    "foto": "13.jpg",
+    "genero": "67e411d8585a485b54864c11"
+}
+
+### Actuañizar Genero
+
+PUT http://127.0.0.1:5000/genero/
+Content-Type: application/json
+
+{
+    "id": "67e473da90be26b203f5c82a",
+    "nombre": "Axión"
+}
+
+
+### actualizar pelicula
+
+PUT http://127.0.0.1:5000/pelicula/
+Content-Type: application/json
+
+{
+    
+    "id": "67e4771e90be26b203f5c82f",
+    "codigo": 13,
+    "titulo": "SuperMAN",
+    "protagonista": "cAMILO Perez",
+    "duracion": 160,
+    "resumen": "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ",
+    "foto": "13.jpg",
+    "genero": "67e473da90be26b203f5c82e"
+}
+
+
+### elimianr genero
+
+
+DELETE http://127.0.0.1:5000/genero/ 
+Content-Type: application/json
+
+{
+    "id": "67e472f390be26b203f5c82c"
+}
+
+### agregar usuario
+
+POST http://127.0.0.1:5000/usuario/ 
+Content-Type: application/json
+
+{
+    "usuario": "ccuellar",
+    "password": "12345",
+    "nombres": "César Marino",
+    "apellidos": "Cuéllar Chacón",
+    "correo": "cesarmcuellar@gmail.com"
+}
