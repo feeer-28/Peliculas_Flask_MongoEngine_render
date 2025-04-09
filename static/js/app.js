@@ -276,3 +276,33 @@ function deletePelicula(id){
         }
     });
 }
+document.getElementById('btnRecuperar').addEventListener('click', async () => {
+    const email = document.getElementById('email').value;
+
+    if (!email) {
+        alert('Por favor, ingrese su correo electrónico.');
+        return;
+    }
+
+    try {
+        const response = await fetch('/recuperar_contrasena', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ email }),
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+            alert(result.message);
+            document.getElementById('recuperarContrasenaForm').reset();
+            const modal = bootstrap.Modal.getInstance(document.getElementById('recuperarContrasenaModal'));
+            modal.hide();
+        } else {
+            alert(result.error || 'Error al procesar la solicitud.');
+        }
+    } catch (error) {
+        alert('Error al conectar con el servidor.');
+    }
+});

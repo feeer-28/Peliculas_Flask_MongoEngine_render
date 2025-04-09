@@ -1,0 +1,36 @@
+{% extends "index.html" %}
+{% block contenido %}
+   
+    <div class="recuperar-contrasena w-25 bg-body-secondary mt-3" style="margin: 0 auto">
+        <h3 class="text-center fw-bold">RECUPERAR CONTRASEÑA</h3>
+        <form action="/recuperarContrasena/" method="post" class="w-75" style="margin: 0 auto">
+            <div class="mb-3">
+                <div class="form-floating">
+                    <input type="text" class="form-control" name="txtUser" id="txtUser"
+                    placeholder="Usuario" required>
+                    <label for="txtUser">Nombre de Usuario</label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <div class="form-floating">
+                    <input type="email" class="form-control" name="txtCorreo" id="txtCorreo"
+                    placeholder="Correo electrónico" required>
+                    <label for="txtCorreo">Correo Electrónico</label>
+                </div>
+            </div>
+            
+            <div class="mt-2 mb-2">
+                <button type="submit" class="btn btn-dark">Generar Nueva Contraseña</button>
+                <a href="/" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+    {% if mensaje %}
+        <script>
+            Swal.fire("Información", '{{ mensaje }}', "info")
+        </script>
+    {% endif %}
+{% endblock %}
+{% block piePagina %}
+    {% include "piePagina.html" %}
+{% endblock %}
