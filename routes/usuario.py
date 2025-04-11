@@ -85,7 +85,7 @@ def iniciarSesion():
                 if usuario:
                     session['user']=username
                     session['name_user']=f"{usuario.nombres} {usuario.apellidos}"
-                    email = yagmail.SMTP(CORREO, PASSWORD_CORREO, encoding="utf-8")
+                    email = yagmail.SMTP(CORREO, CLAVEGMAIL, encoding="utf-8")
                     asunto = "Ingreso al Sistema"
                     mensaje = f"Cordial saludo <b>{usuario.nombres} {usuario.apellidos}.</b> \
                             Bienvenido a nuestro aplicativo Gestión peliculas. \
