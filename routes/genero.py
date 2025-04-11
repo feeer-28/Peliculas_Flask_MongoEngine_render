@@ -1,10 +1,10 @@
-from app import app
-from flask import request, render_template, session
+from flask import request, render_template, session, Blueprint
 from models.genero import Genero
 from models.pelicula import Pelicula
 
+genero_bp = Blueprint('genero', __name__)
 
-@app.route("/genero/", methods=['GET'])
+@genero_bp.route("/genero/", methods=['GET'])
 def listGeneros():
     """_summary_
         Función que retorna la lista de generos
@@ -22,7 +22,7 @@ def listGeneros():
     return {"mensaje": mensaje, "generos":generos}
 
 
-@app.route("/genero/", methods=['POST'])
+@genero_bp.route("/genero/", methods=['POST'])
 def addGenero():
     try:
         mensaje=None
@@ -43,7 +43,7 @@ def addGenero():
 
 
         
-@app.route("/genero/", methods=['PUT'])
+@genero_bp.route("/genero/", methods=['PUT'])
 def updateGenero():
     try:
         mensaje=None
@@ -63,7 +63,7 @@ def updateGenero():
         
     return {"estado":estado, "mensaje": mensaje}
 
-@app.route("/genero/", methods=['DELETE'])
+@genero_bp.route("/genero/", methods=['DELETE'])
 def deleteGenero():
     try:
         mensaje=None
@@ -91,7 +91,7 @@ def deleteGenero():
 
 #vistas
 
-@app.route("/generos/", methods=['GET'])
+@genero_bp.route("/generos/", methods=['GET'])
 def listarGeneros():
     if("user" in session):
         try:
@@ -106,7 +106,7 @@ def listarGeneros():
         mensaje="Debe primero ingresar con credenciales válidas"
         return render_template("frmIniciarSesion.html", mensaje=mensaje)
     
-@app.route("/vistaGenero/", methods=['GET'])
+@genero_bp.route("/vistaGenero/", methods=['GET'])
 def vistaGenero():
     if("user" in session):
         return render_template("frmAgregarGenero.html")

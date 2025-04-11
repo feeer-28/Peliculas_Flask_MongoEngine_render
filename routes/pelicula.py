@@ -1,10 +1,11 @@
-from app import app
-from flask import request, render_template, redirect, session
+from flask import request, render_template, redirect, session, Blueprint
 from models.pelicula import Pelicula
 from models.genero import Genero
 from bson.objectid import ObjectId
 
-@app.route("/pelicula/", methods=['GET'])
+pelicula_bp = Blueprint('pelicula', __name__)
+
+@pelicula_bp.route("/pelicula/", methods=['GET'])
 def listPelicula():
     try:   
         mensaje=None     
@@ -14,7 +15,7 @@ def listPelicula():
     
     return {"mensaje": mensaje, "peliculas":peliculas}
 
-@app.route("/pelicula/", methods=['POST'])
+@pelicula_bp.route("/pelicula/", methods=['POST'])
 def addPelicula():
     try:
         mensaje=None
@@ -39,7 +40,7 @@ def addPelicula():
     return {"estado":estado, "mensaje":mensaje}
 
 
-@app.route("/pelicula/", methods=['PUT'])
+@pelicula_bp.route("/pelicula/", methods=['PUT'])
 def updatePelicula():
     try:
         mensaje=None
@@ -70,7 +71,7 @@ def updatePelicula():
         
     return {"estado":estado, "mensaje": mensaje}
 
-@app.route("/pelicula/", methods=['DELETE'])
+@pelicula_bp.route("/pelicula/", methods=['DELETE'])
 def deletePelicula():
     try:
         mensaje=None
@@ -93,7 +94,7 @@ def deletePelicula():
 
 #vistas
 
-@app.route("/peliculas/", methods=['GET'])
+@pelicula_bp.route("/peliculas/", methods=['GET'])
 def listarPeliculas():
     if ("user" in session):
         peliculas = Pelicula.objects()
@@ -107,8 +108,7 @@ def listarPeliculas():
         return render_template("frmIniciarSesion.html", mensaje=mensaje)
         
 
-
-@app.route("/vistaAgregarPelicula/", methods=['GET'])
+@pelicula_bp.route("/vistaAgregarPelicula/", methods=['GET'])
 def vistaAgregarPelicula():
     if ("user" in session):
         generos = Genero.objects()
@@ -118,7 +118,7 @@ def vistaAgregarPelicula():
         return render_template("frmIniciarSesion.html", mensaje=mensaje)
         
 
-@app.route("/vistaEditarPelicula/<string:id>/", methods=['GET'])
+@pelicula_bp.route("/vistaEditarPelicula/<string:id>/", methods=['GET'])
 def mostrarVistaEditarPelicula(id):  
     if ("user" in session):  
         pelicula = Pelicula.objects(id=ObjectId(id)).first()
